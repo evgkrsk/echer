@@ -18,14 +18,10 @@ RUN set -ex && \
     rm -f bin/echer.dwarf && \
     :
 
-FROM alpine:latest
-# FIXME
-ENV UPDATE_PACKAGES enca
-
-WORKDIR /app
-
+FROM alpine:3.13
+ENV UPDATE_PACKAGES dumb-init
 ENV CRYSTAL_ENV production
-ENV WEB_PORT 8080
+WORKDIR /app
 
 COPY --from=build-env /app/bin /app/bin
 
@@ -34,6 +30,7 @@ RUN set -ex && \
     rm -rf /var/cache/apk/* && \
     :
 
-EXPOSE $WEB_PORT
+EXPOSE 8080
 
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/app/bin/echer"]
