@@ -1,0 +1,16 @@
+name: echer
+version: 0.0.1
+
+authors:
+  - Evgenii Tereshkov <evg.krsk@gmail.com>
+
+crystal: 1.0.0
+
+license: GPL3+
+
+targets:
+  echer:
+    main: main.cr
+
+executables:
+  - echer
