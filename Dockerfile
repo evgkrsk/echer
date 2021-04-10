@@ -24,7 +24,7 @@ ENV UPDATE_PACKAGES dumb-init
 ENV CRYSTAL_ENV production
 WORKDIR /app
 
-COPY --from=build-env /app/bin /app/bin
+COPY --from=build-env /app/bin/echer /app/bin/echer
 
 RUN set -ex && \
     apk --update --no-cache -u add $UPDATE_PACKAGES && \
