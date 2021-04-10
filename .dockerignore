@@ -7,3 +7,6 @@
 docker-compose*
 .yamllint
 .eslintrc.yml
+bin/echer
+bin/echer.dwarf
+bin/ameba

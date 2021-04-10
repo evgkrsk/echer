@@ -12,6 +12,7 @@ RUN set -ex && \
 COPY . /app
 
 RUN set -ex && \
+    crystal bin/ameba.cr && \
     shards build --release --static && \
     strip bin/echer && \
     upx -9 bin/echer && \

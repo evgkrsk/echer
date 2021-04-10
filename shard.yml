@@ -14,3 +14,8 @@ targets:
 
 executables:
   - echer
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.14.2
