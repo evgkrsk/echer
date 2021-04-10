@@ -12,8 +12,6 @@ RUN set -ex && \
 COPY . /app
 
 RUN set -ex && \
-    shards build --static && \
-    rm -f bin/echer && \
     shards build --release --static && \
     strip bin/echer && \
     upx -9 bin/echer && \
