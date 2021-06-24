@@ -37,3 +37,5 @@ jobs:
       run: crystal spec --order=random --error-on-warnings
     - name: Build
       run: shards build --stats --progress --local
+    - name: Docker build
+      run: docker build -t echer:${{ github.sha }} .
