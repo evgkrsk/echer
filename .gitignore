@@ -13,3 +13,9 @@
 /bin/echer
 /bin/echer.dwarf
 /bin/ameba
+/.github/
+/.git/
+.gitignore
+LICENSE
+.yamllint
+README.md
