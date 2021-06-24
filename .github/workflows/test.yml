@@ -44,7 +44,7 @@ jobs:
       name: Run Trivy vulnerability scanner (CRIT only)
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 'evgkrsk/etcher:${{ github.sha }}'
+        image-ref: 'evgkrsk/etcher:${{ steps.meta.outputs.version }}'
         exit-code: '1'
         ignore-unfixed: true
         severity: 'CRITICAL'
@@ -52,4 +52,4 @@ jobs:
       name: Run Trivy vulnerability scanner (full list)
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 'evgkrsk/etcher:${{ github.sha }}'
+        image-ref: 'evgkrsk/etcher:${{ steps.meta.outputs.version }}'
