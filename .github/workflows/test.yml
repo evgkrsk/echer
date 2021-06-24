@@ -21,4 +21,17 @@ jobs:
       env:
         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Docker build
-      run: docker build -t echer:${{ github.sha }} .
+      run: docker build -t evgkrsk/etcher:${{ github.sha }} .
+    -
+      name: Run Trivy vulnerability scanner (CRIT only)
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'evgkrsk/etcher:${{ github.sha }}'
+        exit-code: '1'
+        ignore-unfixed: true
+        severity: 'CRITICAL'
+    -
+      name: Run Trivy vulnerability scanner (full list)
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'evgkrsk/etcher:${{ github.sha }}'
