@@ -42,6 +42,7 @@ jobs:
         push: false
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+    - run: docker images --no-trunc
     -
       name: Run Trivy vulnerability scanner (CRIT only)
       uses: aquasecurity/trivy-action@master
