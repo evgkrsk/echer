@@ -68,5 +68,5 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        body: 'Docker image: evgkrsk/etcher@${{ steps.meta.outputs.version }}'
-        name: 'Release ${{ github.ref }}'
+        body: '**Docker image**: evgkrsk/etcher:${{ steps.meta.outputs.version }}'
+        name: 'Release ${{ steps.meta.outputs.version }}'
