@@ -13,7 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: crystal-lang/install-crystal@v1
     - name: 'Yamllint'
       uses: karancode/yamllint-github-action@master
       with:
@@ -21,21 +20,5 @@ jobs:
         yamllint_comment: true
       env:
         GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Cache shards
-      uses: actions/cache@v2
-      with:
-        path: lib
-        key: ${{ runner.os }}-shards-${{ hashFiles('**/shard.lock') }}
-        restore-keys: ${{ runner.os }}-shards-
-    - name: Install shards
-      run: shards check || shards install
-    - name: Run ameba
-      run: crystal bin/ameba.cr
-    - name: Check format
-      run: crystal tool format --check
-    - name: Run tests
-      run: crystal spec --order=random --error-on-warnings
-    - name: Build
-      run: shards build --stats --progress --local
     - name: Docker build
       run: docker build -t echer:${{ github.sha }} .

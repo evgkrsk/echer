@@ -13,7 +13,9 @@ COPY . /app
 
 RUN set -ex && \
     crystal bin/ameba.cr && \
-    shards build --release --static && \
+    crystal tool format --check && \
+    crystal spec --order=random --error-on-warnings && \
+    shards build --release --static --stats --progress --local && \
     strip bin/echer && \
     upx -9 bin/echer && \
     rm -f bin/echer.dwarf && \
