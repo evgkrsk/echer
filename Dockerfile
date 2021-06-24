@@ -1,4 +1,4 @@
-FROM crystallang/crystal:1.0.0-alpine as build-env
+FROM crystallang/crystal:latest-alpine as build-env
 ENV BUILD_PACKAGES upx
 WORKDIR /app
 
@@ -19,9 +19,8 @@ RUN set -ex && \
     rm -f bin/echer.dwarf && \
     :
 
-FROM alpine:3.13
+FROM alpine:latest
 ENV UPDATE_PACKAGES dumb-init
-ENV CRYSTAL_ENV production
 WORKDIR /app
 
 COPY --from=build-env /app/bin/echer /app/bin/echer
