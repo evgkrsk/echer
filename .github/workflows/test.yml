@@ -30,7 +30,6 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}.{{patch}}
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}
-          type=raw,${{ github.sha }}
     -
       name: Build docker image
       id: build
