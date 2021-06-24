@@ -4,9 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  pull_request:
-    branches:
-      - 'master'
 
 jobs:
   docker:
@@ -41,7 +38,7 @@ jobs:
       name: Run Trivy vulnerability scanner (CRIT only)
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 'index.docker.io/evgkrsk/etcher@${{ steps.build.outputs.digest }}'
+        image-ref: 'evgkrsk/etcher:${{ steps.meta.outputs.version }}'
         exit-code: '1'
         ignore-unfixed: true
         severity: 'CRITICAL'
@@ -49,7 +46,7 @@ jobs:
       name: Run Trivy vulnerability scanner (full list)
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 'index.docker.io/evgkrsk/etcher@${{ steps.build.outputs.digest }}'
+        image-ref: 'evgkrsk/etcher:${{ steps.meta.outputs.version }}'
     -
       name: Login to DockerHub
       if: github.event_name != 'pull_request'
@@ -71,5 +68,5 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        body: 'Docker image: evgkrsk/etcher@${{ steps.build.outputs.digest }}' # FIXME
+        body: 'Docker image: evgkrsk/etcher@${{ steps.meta.outputs.version }}'
         name: 'Release ${{ github.ref }}'
