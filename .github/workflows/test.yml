@@ -17,7 +17,6 @@ jobs:
     - name: 'Yamllint'
       uses: karancode/yamllint-github-action@master
       with:
-        yamllint_strict: true
         yamllint_config_filepath: .yamllint
         yamllint_comment: true
       env:
