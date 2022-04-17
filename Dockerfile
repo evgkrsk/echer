@@ -2,7 +2,9 @@ FROM crystallang/crystal:latest-alpine as build-env
 ENV BUILD_PACKAGES upx
 WORKDIR /app
 
-RUN apk --update --no-cache add $BUILD_PACKAGES
+RUN set -ex && \
+    apk --update --no-cache upgrade && \
+    apk --no-cache add $BUILD_PACKAGES
 
 COPY shard.yml shard.lock ./
 RUN set -ex && \
@@ -18,7 +20,6 @@ RUN set -ex && \
     shards build --release --static --stats --progress --local && \
     strip bin/echer && \
     upx -9 bin/echer && \
-    rm -f bin/echer.dwarf && \
     :
 
 FROM alpine:latest
@@ -28,7 +29,8 @@ WORKDIR /app
 COPY --from=build-env /app/bin/echer /app/bin/echer
 
 RUN set -ex && \
-    apk --update --no-cache -u add $UPDATE_PACKAGES && \
+    apk --update --no-cache upgrade && \
+    apk --no-cache add --upgrade $UPDATE_PACKAGES && \
     rm -rf /var/cache/apk/* && \
     :
 
