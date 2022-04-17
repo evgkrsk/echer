@@ -35,6 +35,7 @@ RUN set -ex && \
     :
 
 EXPOSE 8080
+USER 1001:1001
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/app/bin/echer"]
