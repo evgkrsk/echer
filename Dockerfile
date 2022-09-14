@@ -22,14 +22,14 @@ RUN set -ex && \
     upx -9 bin/echer && \
     :
 
-FROM alpine:latest
+FROM alpine:3.16.2
 ENV UPDATE_PACKAGES dumb-init
 WORKDIR /app
 
 COPY --from=build-env /app/bin/echer /app/bin/echer
 
 RUN set -ex && \
-    apk --update --no-cache upgrade && \
+    apk upgrade --update-cache --no-cache && \
     apk --no-cache add --upgrade $UPDATE_PACKAGES && \
     rm -rf /var/cache/apk/* && \
     :
