@@ -70,3 +70,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         body: '**Docker image**: evgkrsk/etcher:${{ steps.meta.outputs.version }}'
         name: 'Release ${{ steps.meta.outputs.version }}'
+        generateReleaseNotes: true
