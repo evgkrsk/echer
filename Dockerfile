@@ -2,6 +2,7 @@ FROM crystallang/crystal:latest-alpine as build-env
 ENV BUILD_PACKAGES upx
 WORKDIR /app
 
+# hadolint ignore=DL3018
 RUN set -ex && \
     apk --update --no-cache upgrade && \
     apk --no-cache add $BUILD_PACKAGES
@@ -22,12 +23,13 @@ RUN set -ex && \
     upx -9 bin/echer && \
     :
 
-FROM alpine:3.16.2
+FROM alpine:3.16.8
 ENV UPDATE_PACKAGES dumb-init
 WORKDIR /app
 
 COPY --from=build-env /app/bin/echer /app/bin/echer
 
+# hadolint ignore=DL3018
 RUN set -ex && \
     apk upgrade --update-cache --no-cache && \
     apk --no-cache add --upgrade $UPDATE_PACKAGES && \
